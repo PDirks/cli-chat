@@ -1,12 +1,6 @@
-/*
- * Peter Dirks
- * cs 4850
- * Lab 3
- * Due April 28, 2015
+/* 
+ * a simple chat room that includes multiple clients and a server. This file contains the server portion
  * 
- * Description: a simple chat room that includes multiple clients and a server. This file contains the server portion
- * 
- * EXTRA CREDIT ATTEMPTED
  */
 
 import java.io.IOException;
@@ -109,10 +103,11 @@ public class EchoServer
 	}// end starter
 
 	protected class clientServer extends Thread{
+		// ends thread when when set to false
+		private volatile boolean run = true;
 		// vairables for validating the client & flow control
 		public String ClientAddr = "";
 		boolean valid = false;
-		boolean end = false;
 		public String activeClient="";
 		public String clmessage;
 		public PrintWriter pw;
@@ -147,7 +142,7 @@ public class EchoServer
 			String activeClient="";
 			try{
 				System.out.println("[debug] server thread ready! client:"+ClientAddr+" threadID:"+ threadID);
-				while(end == false){
+				while(run==true){
 					String line = ins.readLine();
 					String arr[] = line.split(" ");
 					System.out.println("[debug : "+ClientAddr+" ] " +line );
@@ -155,7 +150,7 @@ public class EchoServer
 					if(arr[0].equals("quit")){
 						//System.out.println("[debug] disconnecting client");
 						System.out.println("user "+ClientAddr+" logged out");
-						end = true;
+						kill();
 						broadcast("[server] "+activeClient+" has logged out");
 						outs.println("null");
 						break;
@@ -334,6 +329,13 @@ public class EchoServer
 	 */
 		public void send(String s){
 			pw.println(s);
+		}
+		
+	/*
+	 * kill() - ends main process
+	 */
+		public void kill(){
+			
 		}
 		
 	}// end clientServer class
