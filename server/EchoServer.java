@@ -158,7 +158,7 @@ public class EchoServer
 				/*
 				 * login handler
 				 */
-					if( arr[0].equals("login") && valid == false){
+					if( arr[0].equals("login") && arr.length == 3 && valid == false){
 						//System.out.println("[debug] attempting login");
 						if( usernames.contains(arr[1]) && arr.length > 2 ){
 							int tempindex = usernames.indexOf(arr[1]);
