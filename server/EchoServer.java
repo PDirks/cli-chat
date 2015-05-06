@@ -28,6 +28,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.sql.*;	// for db work
+
 public class EchoServer
 {
 	String sfile = "users.txt";
@@ -51,6 +53,20 @@ public class EchoServer
 			System.exit(0);
 		}
 
+	/*
+	 * need to connect to db
+	 */
+		Connection c = null;
+		try{
+			Class.forName("org.sqlite.JDBC");
+			c = DriverManager.getConnection("jdbc:sqlite:test.db");
+	    } catch ( Exception e ) {
+	      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+	      System.exit(0);
+	    }
+	    System.out.println("[debug] Opened database successfully");
+	    
+		
 		boolean end = false;
 		String activeClient="null";
 		
