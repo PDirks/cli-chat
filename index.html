@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>CLI-chat by PDirks</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>CLI-chat</h1>
+        <p>simple client-server command line chat</p>
+
+        <p class="view"><a href="https://github.com/PDirks/cli-chat">View the Project on GitHub <small>PDirks/cli-chat</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/PDirks/cli-chat/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/PDirks/cli-chat/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/PDirks/cli-chat">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h3>
+<a id="purpose" class="anchor" href="#purpose" aria-hidden="true"><span class="octicon octicon-link"></span></a>Purpose</h3>
+
+<p>Design a chat program involving multiple clients and a host-server. Clients connected may broadcast messages to all users, or send private messages to a specific user. Before being able to send messages, users must login with a valid username and password combination. The server will run the chat service, manage clients, and handle user authentication.</p>
+
+<p>A full description of the requirements can be found <a href="https://github.com/PDirks/cli-chat/blob/master/requirements/lab3_v2.pdf">here</a></p>
+
+<h3>
+<a id="client" class="anchor" href="#client" aria-hidden="true"><span class="octicon octicon-link"></span></a>Client</h3>
+
+<p>The client interface uses multithreading to handle input from the user, as well as listening to the server. This is done with the <em>clientReadThread</em> class and the <em>clientListenThread</em> class respectively.</p>
+
+<h3>
+<a id="server" class="anchor" href="#server" aria-hidden="true"><span class="octicon octicon-link"></span></a>Server</h3>
+
+<p>The server spins up a thread for each connected client. I'm not an expert in thread-management, so this is an obvious area for improvement. Further, the server loads username and password combinations from a plain-text .txt file. This server program wasn't written for a produciton environment, rather it was an exercise in sockets and networking.</p>
+
+<h3>
+<a id="running-it" class="anchor" href="#running-it" aria-hidden="true"><span class="octicon octicon-link"></span></a>Running it</h3>
+
+<p>Both server and client runs from the command line interface. I developed using linux, so any terminal should work fine. Be sure to have java properly installed on your machine. The programs require the same port number to be given as input for there to be a connection (port numbers must be 5 digits long too) </p>
+
+<p>To run:</p>
+
+<ol>
+<li>
+<p>cd into the server directory and run </p>
+
+<p><code>$java EchoServer [port num]</code>  ex. $java EchoServer 18800</p>
+</li>
+<li>
+<p>in another terminal window cd into the client directory and run </p>
+
+<p><code>$java EchoClient [port num]</code> ex. $java EchoClient 18800</p>
+</li>
+</ol>
+
+<h3>
+<a id="client-side-commands" class="anchor" href="#client-side-commands" aria-hidden="true"><span class="octicon octicon-link"></span></a>Client-side commands</h3>
+
+<p>Chat clients can do a few basic commands, most of which require login first.</p>
+
+<ul>
+<li>
+<strong>login [username] [password]</strong> - attempts to login with the server. User will be notified on sucess or failure to login.</li>
+<li>
+<strong>quit</strong> - disconnects user from server and exits client out of program</li>
+<li>
+<strong>send all [message]</strong> - broadcast a message to all clients</li>
+<li>
+<strong>send [username] [message]</strong> - send a private message to one specific user</li>
+<li>
+<strong>who</strong> - list all clients in chat room</li>
+</ul>
+
+<h3>
+<a id="to-do" class="anchor" href="#to-do" aria-hidden="true"><span class="octicon octicon-link"></span></a>TO DO</h3>
+
+<ol>
+<li>Thread-management in the server</li>
+<li>Better handling of passwords and usernames</li>
+<li>username/password storage into a sqlite db</li>
+<li>create some server-side commands</li>
+<li>flesh-out client-side commands</li>
+</ol>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/PDirks">PDirks</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
